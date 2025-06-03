@@ -5,13 +5,15 @@ import {
   updatePlaylist,
   deletePlaylist,
   addVideoToPlaylist,
-  removeVideoFromPlaylist
+  removeVideoFromPlaylist,
+  getPlaylistsbyid
 } from '../controllers/playlist.controller';
 
 const router = Router();
 
 router.post('/', createPlaylist);
 router.get('/', getPlaylists);
+router.get('/:id', getPlaylistsbyid);
 router.put('/:id', updatePlaylist);
 router.delete('/:id', deletePlaylist);
 router.post('/:playlistId/videos/:videoId', addVideoToPlaylist);

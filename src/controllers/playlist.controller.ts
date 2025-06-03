@@ -31,6 +31,22 @@ export const getPlaylists = async (req: Request, res: Response) => {
   }
 };
 
+
+export const getPlaylistsbyid = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const userId = req.headers['user-id'] as string;
+
+  try {
+    const playlists = await prisma.playlist.findUnique({
+      where: { id, userId },
+      include: { videos: true }
+    });
+    res.json(playlists);
+  } catch (error) {
+    res.status(400).json({ error: 'Failed to fetch playlists' });
+  }
+};
+
 export const updatePlaylist = async (req: Request, res: Response) => {
   const { id } = req.params;
   const { name, description, isPublic } = req.body;
